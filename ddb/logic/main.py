@@ -1,6 +1,7 @@
 from logic.command_interpreter import CommandInterpreter
 from model.files_handling import FilesHandling
 from user_interface.ui import UI
+from utils.exceptions import InvalidCommand
 
 
 class Main:
@@ -14,6 +15,13 @@ class Main:
 
         while True:
             user_command = self.ui.user_input()
-            command, cols, vals, doc = self.ci.interpret(user_command)
+            try:
+                command, cols, vals, doc = self.ci.interpret(user_command)
+            except InvalidCommand:
+                self.ui.error()
+                continue
+
             if command == 'create':
-                self.fh.create_and_write(doc, ','.join(cols))
+                self.fh.write(doc, ','.join(cols))
+            if command == 'add':
+                self.fh.write(doc, ','.join(vals))

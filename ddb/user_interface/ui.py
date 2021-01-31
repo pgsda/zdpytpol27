@@ -5,3 +5,6 @@ class UI:
 
     def user_input(self):
         return input(' === ')
+
+    def error(self):
+        print('Nieprawidlowe polecenie')
