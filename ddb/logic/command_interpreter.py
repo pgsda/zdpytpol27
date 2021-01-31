@@ -12,7 +12,7 @@ class CommandInterpreter:
         found_pattern = re.search(create_pattern, user_command)
 
         if found_pattern is not None:
-            print(found_pattern)
+            return 'create', found_pattern.group(2).replace(' ', '').split(','), None, found_pattern.group(1)
 
         # (command,                     columns,                 values,             document)
         # create/add/select/delete      ['id', 'gatunek'...]     ['1', 'Maria'...]   zoo/uczestnicy
